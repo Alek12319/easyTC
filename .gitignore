@@ -61,3 +61,5 @@ compile_commands.json
 /.vscode
 /build
 /3rdparty
+# *.ps1
+

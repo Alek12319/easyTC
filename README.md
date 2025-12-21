@@ -27,7 +27,7 @@ https://github.com/CrowCpp/Crow.git
 ## 常用命令
 ```bash
 cd build
-rm -rf * rm *
+rm -rf * Remove-Item * -Recurse
 cmake ..
 cmake --build . --config Release --target install
 

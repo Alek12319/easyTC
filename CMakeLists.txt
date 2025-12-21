@@ -20,5 +20,5 @@ if(WIN32)
 endif()
 
 message(${CROW_DIR})
-# add_subdirectory(src)
+add_subdirectory(src)
 add_subdirectory(example)

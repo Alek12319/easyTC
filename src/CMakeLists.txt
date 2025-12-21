@@ -1,7 +1,8 @@
-project(TEST)
+project(easyTCTool)
+file(GLOB SRC_CPP base/*cpp network/*.cpp )
 
-set(SRC_CPP test.cpp)
-add_executable(${PROJECT_NAME} ${SRC_CPP})
+# add_library(${PROJECT_NAME} SHARED ${SRC_CPP})
+add_library(${PROJECT_NAME} STATIC ${SRC_CPP})
 
 include(GNUInstallDirs)
 install(TARGETS ${PROJECT_NAME}
