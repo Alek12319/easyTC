@@ -1,25 +1,43 @@
-#include "spdlog/spdlog.h"
-
-int main() 
+#include"src/network/security_udp_session.h"
+#include<iostream>
+using namespace network;
+int main()
 {
-    spdlog::info("Welcome to spdlog!");
-    spdlog::error("Some error message with arg: {}", 1);
+security_udp clc(6060);
+clc.setMsgHandleFunc([&](std::shared_ptr<udp_conn> conn,BUFFERPTR vec,size_t len)
+{
+    std::cout<<"receive: ";
+    std::cout.write(vec->data(),len);
+    std::cout<<"\n";
+    if(conn)
+    {
+        conn->sendMsg(vec->data(),len);
+
+    }
     
-    spdlog::warn("Easy padding in numbers like {:08d}", 12);
-    spdlog::critical("Support for int: {0:d};  hex: {0:x};  oct: {0:o}; bin: {0:b}", 42);
-    spdlog::info("Support for floats {:03.2f}", 1.23456);
-    spdlog::info("Positional args are {1} {0}..", "too", "supported");
-    spdlog::info("{:<30}", "left aligned");
-    
-    spdlog::set_level(spdlog::level::debug); // Set *global* log level to debug
-    spdlog::debug("This message should be displayed..");    
-    
-    // change log pattern
-    spdlog::set_pattern("[%H:%M:%S %z] [%n] [%^---%L---%$] [thread %t] %v");
-    
-    // Compile time log levels
-    // Note that this does not change the current log level, it will only
-    // remove (depending on SPDLOG_ACTIVE_LEVEL) the call on the release code.
-    SPDLOG_TRACE("Some trace message with param {}", 42);
-    SPDLOG_DEBUG("Some debug message");
+    // clc.send(vec->data(),len,"127.0.0.1",6060);
+
+});
+clc.start();
+clc.send("sddssd 1",9,"127.0.0.1",6060);
+// clc.send("sddssd 2",9,"127.0.0.1",6060);
+// clc.send("sddssd 3",9,"127.0.0.1",6060);
+
+  
+test();
+int cnt=0;
+while(1)
+{
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    char a[32];
+    memset(a,0,sizeof(a));
+    cnt+=1;
+    sprintf(a, "test msg:%d", cnt);
+    // std::cout<<a<<"\n";
+    clc.send(a,sizeof(a),"127.0.0.1",6060);
+}
+// std::this_thread::sleep_for(std::chrono::milliseconds(500));
+return 0;
+
+
 }

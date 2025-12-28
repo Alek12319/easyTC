@@ -11,6 +11,7 @@ set(CROW_DIR ${PROJECT_SOURCE_DIR}/3rdparty/Crow/include)
 
 set(INCLUDE_DIR ${SPDLOG_DIR} ${ASIO_DIR} ${CROW_DIR})
 include_directories(${INCLUDE_DIR})
+include_directories(${PROJECT_SOURCE_DIR})
 
 set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/install)
 
