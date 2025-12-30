@@ -177,7 +177,7 @@ private:
   uint64_t sendSuquenceId_;
   std::map<uint32_t,std::shared_ptr<MsgCahes>> send_msg_cahes_;
 
-  int retry_interval_time_{1000};//microsec
+  int retry_interval_time_{5000};//microsec
 
   uint64_t generateMsgSuquence();
   MsgFrame generateHeader(char* data, size_t msg_len);
